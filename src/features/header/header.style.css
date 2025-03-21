@@ -1,0 +1,75 @@
+.header {
+  padding-top: 40px;
+  background: #ed5928 url("../images/header-bg.jpg") no-repeat left bottom;
+  background-size: cover;
+}
+
+.header-cite {
+  color: #fff;
+  font-size: 30px;
+  font-weight: 100;
+}
+
+.header-inner {
+  background-color: rgba(211, 67, 27, 0.5);
+}
+
+.header-inner .logo {
+  position: absolute;
+  top: 0;
+  right: 100px;
+  height: 100%;
+  opacity: 0.1;
+}
+
+/*--------------------------------------------------------------
+## Date
+--------------------------------------------------------------*/
+.date-wrap {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+  padding: 35px 0;
+}
+
+.date-wrap time {
+  display: block;
+  margin-left: 40px;
+  color: #fff;
+  font-size: 23px;
+  font-weight: 300;
+}
+
+.date-wrap .icon {
+  width: 25px;
+  height: 25px;
+}
+
+@media only screen and (max-width: 600px) {
+  .wrap {
+    padding: 0 20px;
+  }
+
+  .header {
+    padding-top: 20px;
+  }
+
+  .header-cite {
+    font-size: 25px;
+  }
+
+  .header-inner .logo {
+    right: 20px;
+  }
+
+  .btn-icon img {
+    width: 30px !important;
+  }
+
+  .date-wrap time {
+    margin-left: 20px;
+    font-size: 20px;
+  }
+}

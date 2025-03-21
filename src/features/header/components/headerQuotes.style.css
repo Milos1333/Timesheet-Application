@@ -1,0 +1,24 @@
+.header-blockquote {
+  max-width: 520px;
+  margin-left: auto;
+  padding: 40px 0;
+  text-align: right;
+}
+
+.header-quote {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  color: #fff;
+  font-size: 46px;
+  font-weight: 300;
+}
+
+@media only screen and (max-width: 600px) {
+  .header-quote {
+    font-size: 27px;
+  }
+
+  .header-cite {
+    font-size: 22px;
+  }
+}
