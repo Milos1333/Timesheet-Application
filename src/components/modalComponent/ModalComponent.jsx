@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal, Button, Input, Form } from "antd";
-import "../Modal/modal.style.css";
+import "./modalComponent.style.css";
 
 const ModalComponent = ({ isModalOpen, closeModal }) => {
   return (
