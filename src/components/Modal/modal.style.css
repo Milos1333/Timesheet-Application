@@ -1,0 +1,90 @@
+.ant-modal {
+  margin: auto auto;
+  width: 550px !important;
+}
+
+.ant-modal-content {
+  border-radius: 0 !important;
+}
+
+.ant-modal-title {
+  font-size: 20px !important;
+  font-weight: 300 !important;
+}
+
+.form-item {
+  margin: 20px 0;
+}
+
+.form-label {
+  margin-top: 0;
+  margin-bottom: 1em;
+  color: #666;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.form-item input {
+  border-radius: 0 !important;
+  margin-top: 2px;
+  box-shadow: none !important;
+  border: 1px solid rgba(0, 0, 0, 0.253);
+  outline: none !important;
+  cursor: text;
+}
+
+.form-item input:focus {
+  outline: none !important;
+  border: 1px solid rgba(0, 0, 0, 0.253) !important;
+}
+
+.form-item input:hover {
+  border: 1px solid rgba(0, 0, 0, 0.253) !important;
+}
+
+.btn-wrap {
+  width: 100%;
+  padding: 20px 0px 10px 0;
+  display: flex;
+  justify-content: end;
+}
+
+.btn-wrap button {
+  background-color: #ed5928 !important;
+  width: 100px;
+  border-radius: 0;
+  transition: background-color 0.3s ease;
+}
+
+.btn-wrap button:hover {
+  border: none;
+  background-color: #ff5f29 !important;
+}
+
+@media screen and (max-width: 600px) {
+  .ant-modal {
+    width: 70% !important;
+  }
+
+  .ant-modal-title {
+    font-size: 15px !important;
+  }
+
+  .form-label {
+    font-size: 13px;
+  }
+
+  .form-item input {
+    font-size: 12px;
+  }
+
+  .btn-wrap {
+    justify-content: center;
+  }
+
+  .btn-wrap button {
+    width: 80px;
+    font-size: 13px;
+    padding: 0px;
+  }
+}
