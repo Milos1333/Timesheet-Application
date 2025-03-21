@@ -1,12 +1,19 @@
 import "./App.css";
+import { useState } from "react";
+import ModalComponent from "./components/Modal/Modal";
 
 const App = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   return (
     <div className="page-wrap">
       {/* header */}
       <header className="header">
         <div className="wrap">
-          <span className="btn-icon">
+          <span className="btn-icon" onClick={openModal}>
             <img
               className="icon icon-plus js-modal-init"
               src="icons/icon-plus.svg"
@@ -75,39 +82,10 @@ const App = () => {
           </div>
         </div>
       </main>
-      {/* modal window */}
-      <div className="modal-wrap js-modal">
-        <div className="modal js-modal-inner">
-          <h2>Create a task:</h2>
-          <form action>
-            <div className="field-wrap">
-              <label className="label" htmlFor>
-                Title:
-              </label>
-              <input
-                className="field"
-                type="text"
-                id
-                placeholder="Enter title here..."
-              />
-            </div>
-            <div className="field-wrap">
-              <label className="label" htmlFor>
-                Hours:
-              </label>
-              <input
-                className="field"
-                type="text"
-                id
-                placeholder="Add hours here..."
-              />
-            </div>
-            <div className="btn-wrap align-right">
-              <input className="btn" type="submit" defaultValue="Create" />
-            </div>
-          </form>
-        </div>
-      </div>
+
+      {/* Modal Component */}
+      <ModalComponent isModalOpen={isModalOpen} closeModal={closeModal} />
+
       {/* footer */}
       <footer className="footer">
         <div className="wrap">
