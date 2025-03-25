@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import Header from "./features/header/Header";
 import TaskList from "./features/tasks/TaskList";
+import Footer from "./features/footer/Footer";
 
 const App = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -26,12 +27,7 @@ const App = () => {
         addTask={addTask}
       />
       <TaskList tasks={tasks} removeTask={removeTask} />
-
-      <footer className="footer">
-        <div className="wrap">
-          <span className="copy">© 2019 Vega IT Sourcing</span>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };
