@@ -1,14 +1,8 @@
-import { useState } from "react";
 import ModalComponent from "../../components/ModalComponent/ModalComponent";
 import "./header.style.css";
 import HeaderQuotes from "./components/HeaderQuotes";
 
-const Header = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
-
+const Header = ({ isModalOpen, openModal, closeModal, addTask }) => {
   return (
     <header className="header">
       <div className="wrap">
@@ -34,7 +28,11 @@ const Header = () => {
           </div>
         </div>
       </div>
-      <ModalComponent closeModal={closeModal} isModalOpen={isModalOpen} />
+      <ModalComponent
+        closeModal={closeModal}
+        isModalOpen={isModalOpen}
+        addTask={addTask}
+      />
     </header>
   );
 };

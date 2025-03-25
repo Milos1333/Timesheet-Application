@@ -1,0 +1,42 @@
+.main {
+  display: block;
+  padding: 20px 0;
+  height: 500px;
+}
+
+.wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 0 30px;
+  height: 100%;
+}
+
+.task-list {
+  max-height: 800px;
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.align-right {
+  padding-top: 30px;
+  margin-top: auto;
+  text-align: right;
+}
+
+.check-flag-label {
+  width: 90%;
+  overflow-x: scroll;
+}
+
+.hours-box {
+  text-align: center;
+}
+
+.delete-btn {
+  position: absolute;
+}
