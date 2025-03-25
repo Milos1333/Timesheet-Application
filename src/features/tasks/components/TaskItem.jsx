@@ -1,3 +1,5 @@
+import "./taskItem.style.css";
+
 const TaskItem = ({ title, hours, onRemove }) => {
   return (
     <div className="item-row">
