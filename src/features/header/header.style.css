@@ -4,6 +4,10 @@
   background-size: cover;
 }
 
+.header > .wrap {
+  height: 350px;
+}
+
 .header-cite {
   color: #fff;
   font-size: 30px;
@@ -22,9 +26,6 @@
   opacity: 0.1;
 }
 
-/*--------------------------------------------------------------
-## Date
---------------------------------------------------------------*/
 .date-wrap {
   display: -webkit-box;
   display: -webkit-flex;

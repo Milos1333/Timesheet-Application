@@ -73,23 +73,6 @@ body {
   flex-direction: column;
 }
 
-.main {
-  display: block;
-  padding: 20px 0;
-}
-
-.wrap {
-  position: relative;
-  width: 100%;
-  max-width: 1024px;
-  margin: 0 auto;
-  padding: 0 30px;
-}
-
-.align-right {
-  text-align: right;
-}
-
 /*--------------------------------------------------------------
 ## Footer
 --------------------------------------------------------------*/
