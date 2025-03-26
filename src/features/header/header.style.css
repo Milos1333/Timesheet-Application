@@ -8,6 +8,17 @@
   height: 350px;
 }
 
+.wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 0 30px;
+  height: 100%;
+}
+
 .header-cite {
   color: #fff;
   font-size: 30px;
@@ -49,6 +60,10 @@
 }
 
 @media only screen and (max-width: 600px) {
+  .header > .wrap {
+    height: 250px;
+  }
+
   .wrap {
     padding: 0 20px;
   }
@@ -71,6 +86,11 @@
 
   .date-wrap time {
     margin-left: 20px;
-    font-size: 20px;
+    font-size: 17px;
+  }
+
+  .date-wrap .icon {
+    width: 20px;
+    height: 20px;
   }
 }
