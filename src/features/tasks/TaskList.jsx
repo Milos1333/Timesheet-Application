@@ -1,7 +1,11 @@
-import "./taskList.style.css";
+import React from "react";
 import TaskItem from "./components/TaskItem";
+import ModalComponent from "../../components/modalComponent/ModalComponent";
+import "./taskList.style.css";
 
 const TaskList = ({ tasks, removeTask }) => {
+  const totalHours = tasks.reduce((sum, task) => sum + Number(task.hours), 0);
+
   return (
     <main className="main">
       <div className="wrap">
@@ -24,7 +28,7 @@ const TaskList = ({ tasks, removeTask }) => {
                 className="total-input"
                 type="text"
                 readOnly
-                value={tasks.reduce((sum, task) => sum + Number(task.hours), 0)}
+                value={totalHours}
               />
             </div>
           </>
@@ -32,6 +36,8 @@ const TaskList = ({ tasks, removeTask }) => {
           <p className="no-tasks">No tasks available.</p>
         )}
       </div>
+
+      <ModalComponent totalHours={totalHours} />
     </main>
   );
 };

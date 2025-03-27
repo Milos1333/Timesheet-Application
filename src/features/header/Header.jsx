@@ -16,7 +16,7 @@ const Header = ({ isModalOpen, openModal, closeModal, addTask }) => {
         <HeaderQuotes />
       </div>
       <div className="header-inner">
-        <div className="wrap">
+        <div className="wrap-calendar">
           <img className="logo" src="images/vegait-logo.svg" alt="VegaIT" />
           <div className="date-wrap">
             <img

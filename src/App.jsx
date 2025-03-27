@@ -3,12 +3,19 @@ import "./App.css";
 import Header from "./features/header/Header";
 import TaskList from "./features/tasks/TaskList";
 import Footer from "./features/footer/Footer";
+import ModalComponent from "./components/modalComponent/ModalComponent";
 
 const App = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [tasks, setTasks] = useState([]);
 
   const addTask = (title, hours) => {
+    const totalHours = tasks.reduce((sum, task) => sum + Number(task.hours), 0);
+
+    if (totalHours + Number(hours) > 24) {
+      return;
+    }
+
     const newTask = { title, hours };
     setTasks([...tasks, newTask]);
     setIsModalOpen(false);
@@ -28,6 +35,12 @@ const App = () => {
       />
       <TaskList tasks={tasks} removeTask={removeTask} />
       <Footer />
+      <ModalComponent
+        isModalOpen={isModalOpen}
+        closeModal={() => setIsModalOpen(false)}
+        addTask={addTask}
+        totalHours={tasks.reduce((sum, task) => sum + Number(task.hours), 0)}
+      />
     </div>
   );
 };
