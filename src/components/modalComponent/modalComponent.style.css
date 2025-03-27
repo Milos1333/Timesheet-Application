@@ -1,6 +1,7 @@
 .ant-modal {
   margin: auto auto;
   width: 550px !important;
+  margin-top: 50px;
 }
 
 .ant-modal-content {
@@ -14,6 +15,7 @@
 
 .form-item {
   margin: 20px 0;
+  height: 60px;
 }
 
 .form-label {
@@ -40,6 +42,13 @@
 
 .form-item input:hover {
   border: 1px solid rgba(0, 0, 0, 0.253) !important;
+}
+
+.form-item p {
+  color: red;
+  font-weight: 300;
+  font-size: 12px;
+  margin: 0;
 }
 
 .btn-wrap {
