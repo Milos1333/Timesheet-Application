@@ -1,7 +1,9 @@
 .main {
   display: block;
   padding: 20px 0;
-  height: 500px;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.106) transparent;
 }
 
 .wrap {
@@ -13,6 +15,15 @@
   margin: 0 auto;
   padding: 0 30px;
   height: 100%;
+  min-height: 120px;
+  max-height: 500px;
+}
+
+.wrap > p {
+  font-size: 20px;
+  text-align: center;
+  font-weight: 300;
+  margin-top: 40px;
 }
 
 .task-list {
@@ -35,8 +46,4 @@
 
 .hours-box {
   text-align: center;
-}
-
-.delete-btn {
-  position: absolute;
 }
