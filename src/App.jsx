@@ -1,29 +1,48 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import Header from "./features/header/Header";
 import TaskList from "./features/tasks/TaskList";
 import Footer from "./features/footer/Footer";
 import ModalComponent from "./components/modalComponent/ModalComponent";
+import ApiService from "./core/ApiService";
 
 const App = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [tasks, setTasks] = useState([]);
 
-  const addTask = (title, hours) => {
+  const addTask = async (title, hours) => {
     const totalHours = tasks.reduce((sum, task) => sum + Number(task.hours), 0);
 
     if (totalHours + Number(hours) > 24) {
       return;
     }
 
-    const newTask = { title, hours };
-    setTasks([...tasks, newTask]);
-    setIsModalOpen(false);
+    const newId =
+      tasks.length > 0
+        ? String(Math.max(...tasks.map((task) => Number(task.id))) + 1)
+        : "1";
+
+    const newTask = { id: newId, title, hours };
+
+    const createdTask = await ApiService.createTask(newTask);
+    if (createdTask) {
+      setTasks([...tasks, createdTask]);
+      setIsModalOpen(false);
+    }
   };
 
-  const removeTask = (index) => {
-    setTasks(tasks.filter((_, i) => i !== index));
+  const removeTask = async (id) => {
+    await ApiService.deleteTask(id);
+    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
   };
+
+  useEffect(() => {
+    const fetchAllTasks = async () => {
+      const fetchedTasks = await ApiService.fetchTasks();
+      setTasks(fetchedTasks);
+    };
+    fetchAllTasks();
+  }, []);
 
   return (
     <div className="page-wrap">
