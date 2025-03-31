@@ -12,12 +12,13 @@ const TaskList = ({ tasks, removeTask }) => {
         {tasks.length > 0 ? (
           <>
             <div className="task-list">
-              {tasks.map((task, index) => (
+              {tasks.map((task) => (
                 <TaskItem
-                  key={index}
+                  key={task.id}
+                  id={task.id}
                   title={task.title}
                   hours={task.hours}
-                  onRemove={() => removeTask(index)}
+                  onRemove={() => removeTask(task.id)}
                 />
               ))}
             </div>

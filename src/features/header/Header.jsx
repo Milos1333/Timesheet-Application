@@ -6,9 +6,10 @@ const Header = ({ isModalOpen, openModal, closeModal, addTask }) => {
   return (
     <header className="header">
       <div className="wrap">
-        <span className="btn-icon" onClick={openModal}>
+        <span className="btn-icon">
           <img
             className="icon icon-plus js-modal-init"
+            onClick={openModal}
             src="icons/icon-plus.svg"
             alt="Add New Item"
           />

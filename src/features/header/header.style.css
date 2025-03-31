@@ -59,6 +59,14 @@
   height: 25px;
 }
 
+.btn-icon {
+  cursor: default;
+}
+
+.btn-icon > img {
+  cursor: pointer;
+}
+
 @media only screen and (max-width: 600px) {
   .header > .wrap {
     height: 250px;
