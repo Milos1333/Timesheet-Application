@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import { Modal, Button, Input, Form } from "antd";
-import "./modalComponent.style.css";
+import "./modalComponentCreate.style.css";
 
-const ModalComponent = ({ isModalOpen, closeModal, addTask, totalHours }) => {
+const ModalComponentCreate = ({
+  isModalOpen,
+  closeModal,
+  addTask,
+  totalHours,
+}) => {
   const [title, setTitle] = useState("");
   const [hours, setHours] = useState("");
   const [error, setError] = useState("");
@@ -104,4 +109,4 @@ const ModalComponent = ({ isModalOpen, closeModal, addTask, totalHours }) => {
   );
 };
 
-export default ModalComponent;
+export default ModalComponentCreate;

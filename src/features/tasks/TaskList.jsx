@@ -1,9 +1,8 @@
 import React from "react";
 import TaskItem from "./components/TaskItem";
-import ModalComponent from "../../components/modalComponent/ModalComponent";
 import "./taskList.style.css";
 
-const TaskList = ({ tasks, removeTask }) => {
+const TaskList = ({ tasks, removeTask, openEditModal }) => {
   const totalHours = tasks.reduce((sum, task) => sum + Number(task.hours), 0);
 
   return (
@@ -19,6 +18,7 @@ const TaskList = ({ tasks, removeTask }) => {
                   title={task.title}
                   hours={task.hours}
                   onRemove={() => removeTask(task.id)}
+                  onEdit={() => openEditModal(task)} // Pozivanje funkcije za otvaranje modala
                 />
               ))}
             </div>
@@ -37,8 +37,6 @@ const TaskList = ({ tasks, removeTask }) => {
           <p className="no-tasks">No tasks available.</p>
         )}
       </div>
-
-      <ModalComponent totalHours={totalHours} />
     </main>
   );
 };

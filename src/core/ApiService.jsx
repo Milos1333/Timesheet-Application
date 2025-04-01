@@ -52,6 +52,28 @@ const ApiService = {
       return false;
     }
   },
+
+  // Metoda za izmene zadatka
+  updateTask: async (task) => {
+    try {
+      const response = await fetch(`${BASE_URL}/tasks/${task.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(task),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to update task");
+      }
+
+      return await response.json(); // Vraća ažurirani zadatak
+    } catch (error) {
+      console.error("Error updating task:", error);
+      return null;
+    }
+  },
 };
 
 export default ApiService;

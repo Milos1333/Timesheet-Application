@@ -1,8 +1,9 @@
-import "./taskItem.style.css";
+import React from "react";
 import iconDelete from "../../../assets/deleteIcon.png";
 import iconEdit from "../../../assets/editIcon.png";
+import "./taskItem.style.css";
 
-const TaskItem = ({ id, title, hours, onRemove }) => {
+const TaskItem = ({ id, title, hours, onRemove, onEdit }) => {
   return (
     <div className="item-row">
       <div className="check-flag">
@@ -14,7 +15,7 @@ const TaskItem = ({ id, title, hours, onRemove }) => {
           <button className="delete-btn" onClick={() => onRemove(id)}>
             <img src={iconDelete} alt="Delete" />
           </button>
-          <button className="edit-btn">
+          <button className="edit-btn" onClick={() => onEdit(id)}>
             <img src={iconEdit} alt="Edit" />
           </button>
         </div>

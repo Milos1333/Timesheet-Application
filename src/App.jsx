@@ -3,16 +3,27 @@ import "./App.css";
 import Header from "./features/header/Header";
 import TaskList from "./features/tasks/TaskList";
 import Footer from "./features/footer/Footer";
-import ModalComponent from "./components/modalComponent/ModalComponent";
+import ModalComponentCreate from "./components/modalComponentCreate/ModalComponentCreate";
+import ModalComponentEdit from "./components/modalComponentEdit/ModalComponentEdit";
 import ApiService from "./core/ApiService";
 
 const App = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [tasks, setTasks] = useState([]);
+  const [currentTask, setCurrentTask] = useState(null);
+
+  const totalHours = tasks.reduce((sum, task) => sum + Number(task.hours), 0);
+
+  useEffect(() => {
+    const fetchAllTasks = async () => {
+      const fetchedTasks = await ApiService.fetchTasks();
+      setTasks(fetchedTasks);
+    };
+    fetchAllTasks();
+  }, []);
 
   const addTask = async (title, hours) => {
-    const totalHours = tasks.reduce((sum, task) => sum + Number(task.hours), 0);
-
     if (totalHours + Number(hours) > 24) {
       return;
     }
@@ -27,7 +38,7 @@ const App = () => {
     const createdTask = await ApiService.createTask(newTask);
     if (createdTask) {
       setTasks([...tasks, createdTask]);
-      setIsModalOpen(false);
+      setIsCreateModalOpen(false);
     }
   };
 
@@ -36,29 +47,52 @@ const App = () => {
     setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
   };
 
-  useEffect(() => {
-    const fetchAllTasks = async () => {
-      const fetchedTasks = await ApiService.fetchTasks();
-      setTasks(fetchedTasks);
-    };
-    fetchAllTasks();
-  }, []);
+  const openEditModal = (task) => {
+    setCurrentTask(task);
+    setIsEditModalOpen(true);
+  };
+
+  const saveChanges = async (updatedTask) => {
+    const response = await ApiService.updateTask(updatedTask);
+    if (response) {
+      const updatedTasks = tasks.map((task) =>
+        task.id === updatedTask.id ? updatedTask : task
+      );
+      setTasks(updatedTasks);
+      setIsEditModalOpen(false);
+    }
+  };
 
   return (
     <div className="page-wrap">
       <Header
-        isModalOpen={isModalOpen}
-        openModal={() => setIsModalOpen(true)}
-        closeModal={() => setIsModalOpen(false)}
+        isModalOpen={isCreateModalOpen}
+        openModal={() => setIsCreateModalOpen(true)}
+        closeModal={() => setIsCreateModalOpen(false)}
         addTask={addTask}
       />
-      <TaskList tasks={tasks} removeTask={removeTask} />
+
+      <TaskList
+        tasks={tasks}
+        removeTask={removeTask}
+        openEditModal={openEditModal}
+      />
+
       <Footer />
-      <ModalComponent
-        isModalOpen={isModalOpen}
-        closeModal={() => setIsModalOpen(false)}
+
+      <ModalComponentCreate
+        isModalOpen={isCreateModalOpen}
+        closeModal={() => setIsCreateModalOpen(false)}
         addTask={addTask}
-        totalHours={tasks.reduce((sum, task) => sum + Number(task.hours), 0)}
+        totalHours={totalHours}
+      />
+
+      <ModalComponentEdit
+        isModalOpen={isEditModalOpen}
+        closeModal={() => setIsEditModalOpen(false)}
+        saveChanges={saveChanges}
+        currentTask={currentTask}
+        totalHours={totalHours}
       />
     </div>
   );
