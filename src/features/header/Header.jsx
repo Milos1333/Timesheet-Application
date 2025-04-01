@@ -1,4 +1,4 @@
-import ModalComponent from "../../components/ModalComponent/ModalComponent";
+import ModalComponentCreate from "../../components/modalComponentCreate/ModalComponentCreate";
 import "./header.style.css";
 import HeaderQuotes from "./components/HeaderQuotes";
 
@@ -29,7 +29,7 @@ const Header = ({ isModalOpen, openModal, closeModal, addTask }) => {
           </div>
         </div>
       </div>
-      <ModalComponent
+      <ModalComponentCreate
         closeModal={closeModal}
         isModalOpen={isModalOpen}
         addTask={addTask}
