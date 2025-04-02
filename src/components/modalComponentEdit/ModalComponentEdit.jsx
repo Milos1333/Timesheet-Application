@@ -8,6 +8,8 @@ const ModalComponentEdit = ({
   saveChanges,
   currentTask,
   totalHours,
+  tasks,
+  selectedDate,
 }) => {
   const [title, setTitle] = useState("");
   const [hours, setHours] = useState("");
@@ -62,6 +64,21 @@ const ModalComponentEdit = ({
     if (totalWithoutCurrent + parsedHours > 24) {
       setError("Total hours cannot exceed 24!");
       return;
+    }
+
+    if (selectedDate) {
+      const totalHoursForSelectedDate = tasks
+        .filter((task) => task.date === selectedDate)
+        .reduce((sum, task) => sum + Number(task.hours), 0);
+
+      const totalWithoutCurrent =
+        totalHoursForSelectedDate - Number(currentTask.hours);
+
+      if (totalWithoutCurrent + parsedHours > 24) {
+        setError("Total hours for the selected date cannot exceed 24!");
+        setHours("");
+        return;
+      }
     }
 
     saveChanges({ ...currentTask, title, hours: parsedHours });

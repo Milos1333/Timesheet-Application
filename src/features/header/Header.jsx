@@ -2,7 +2,13 @@ import ModalComponentCreate from "../../components/modalComponentCreate/ModalCom
 import "./header.style.css";
 import HeaderQuotes from "./components/HeaderQuotes";
 
-const Header = ({ isModalOpen, openModal, closeModal, addTask }) => {
+const Header = ({
+  isModalOpen,
+  openModal,
+  closeModal,
+  addTask,
+  selectedDate,
+}) => {
   return (
     <header className="header">
       <div className="wrap">
@@ -25,7 +31,7 @@ const Header = ({ isModalOpen, openModal, closeModal, addTask }) => {
               src="icons/icon-calendar.svg"
               alt="Calendar"
             />
-            <time>02 / 08 / 2019</time>
+            <time>{selectedDate || "No date selected"}</time>
           </div>
         </div>
       </div>

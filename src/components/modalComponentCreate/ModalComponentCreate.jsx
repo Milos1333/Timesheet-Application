@@ -6,7 +6,8 @@ const ModalComponentCreate = ({
   isModalOpen,
   closeModal,
   addTask,
-  totalHours,
+  selectedDate,
+  tasks,
 }) => {
   const [title, setTitle] = useState("");
   const [hours, setHours] = useState("");
@@ -47,10 +48,16 @@ const ModalComponentCreate = ({
       setTitleError("");
     }
 
-    if (totalHours + parsedHours > 24) {
-      setError("Total hours cannot exceed 24!");
-      setHours("");
-      return;
+    if (selectedDate) {
+      const totalHoursForSelectedDate = tasks
+        .filter((task) => task.date === selectedDate)
+        .reduce((sum, task) => sum + Number(task.hours), 0);
+
+      if (totalHoursForSelectedDate + parsedHours > 24) {
+        setError("Total hours for the selected date cannot exceed 24!");
+        setHours("");
+        return;
+      }
     }
 
     addTask(title, parsedHours);
