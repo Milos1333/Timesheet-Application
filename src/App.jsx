@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Header from "./features/header/Header";
@@ -7,6 +6,8 @@ import Footer from "./features/footer/Footer";
 import ModalComponentCreate from "./components/modalComponentCreate/ModalComponentCreate";
 import ModalComponentEdit from "./components/modalComponentEdit/ModalComponentEdit";
 import ApiService from "./core/ApiService";
+import RedirectToToday from "./components/redirectToToday/RedirectToToday";
+import { useEffect, useState } from "react";
 
 const App = () => {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
@@ -70,18 +71,19 @@ const App = () => {
   };
 
   return (
-    <BrowserRouter>
-      <div className="page-wrap">
-        <Header
-          isModalOpen={isCreateModalOpen}
-          openModal={() => setIsCreateModalOpen(true)}
-          closeModal={() => setIsCreateModalOpen(false)}
-          addTask={addTask}
-          selectedDate={selectedDate}
-          tasks={tasks}
-        />
-
+    <div className="page-wrap">
+      <Header
+        isModalOpen={isCreateModalOpen}
+        openModal={() => setIsCreateModalOpen(true)}
+        closeModal={() => setIsCreateModalOpen(false)}
+        addTask={addTask}
+        selectedDate={selectedDate}
+        tasks={tasks}
+      />
+      <BrowserRouter>
         <Routes>
+          <Route path="/" element={<RedirectToToday />} />
+
           <Route
             path="/:date"
             element={
@@ -93,39 +95,28 @@ const App = () => {
               />
             }
           />
-          <Route
-            path="/"
-            element={
-              <TaskList
-                tasks={tasks}
-                removeTask={removeTask}
-                openEditModal={openEditModal}
-                onDateChange={setSelectedDate}
-              />
-            }
-          />
         </Routes>
+      </BrowserRouter>
 
-        <ModalComponentCreate
-          isModalOpen={isCreateModalOpen}
-          closeModal={() => setIsCreateModalOpen(false)}
-          addTask={addTask}
-          selectedDate={selectedDate}
-          tasks={tasks}
-        />
+      <ModalComponentCreate
+        isModalOpen={isCreateModalOpen}
+        closeModal={() => setIsCreateModalOpen(false)}
+        addTask={addTask}
+        selectedDate={selectedDate}
+        tasks={tasks}
+      />
 
-        <ModalComponentEdit
-          isModalOpen={isEditModalOpen}
-          closeModal={() => setIsEditModalOpen(false)}
-          saveChanges={saveChanges}
-          currentTask={currentTask}
-          tasks={tasks}
-          selectedDate={selectedDate}
-        />
+      <ModalComponentEdit
+        isModalOpen={isEditModalOpen}
+        closeModal={() => setIsEditModalOpen(false)}
+        saveChanges={saveChanges}
+        currentTask={currentTask}
+        tasks={tasks}
+        selectedDate={selectedDate}
+      />
 
-        <Footer />
-      </div>
-    </BrowserRouter>
+      <Footer />
+    </div>
   );
 };
 

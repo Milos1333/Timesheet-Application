@@ -1,6 +1,12 @@
 .item-row {
   margin: 20px 0;
   position: relative;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.item-row.deleting {
+  opacity: 0;
+  transform: translateX(-20px);
 }
 
 .check-flag {
@@ -115,6 +121,16 @@
   align-items: center;
   justify-content: center;
   padding: 0;
+}
+
+.edit-btn img,
+.delete-btn img {
+  transition: transform 0.3s ease !important;
+}
+
+.delete-btn:hover img,
+.edit-btn:hover img {
+  transform: scale(1.08);
 }
 
 @media only screen and (max-width: 600px) {
