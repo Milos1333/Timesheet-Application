@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Header from "./features/header/Header";
 import TaskList from "./features/tasks/TaskList";
@@ -11,9 +12,8 @@ const App = () => {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [tasks, setTasks] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(null);
   const [currentTask, setCurrentTask] = useState(null);
-
-  const totalHours = tasks.reduce((sum, task) => sum + Number(task.hours), 0);
 
   useEffect(() => {
     const fetchAllTasks = async () => {
@@ -24,7 +24,13 @@ const App = () => {
   }, []);
 
   const addTask = async (title, hours) => {
-    if (totalHours + Number(hours) > 24) {
+    const parsedHours = Number(hours);
+
+    const totalHoursForSelectedDate = tasks
+      .filter((task) => task.date === selectedDate)
+      .reduce((sum, task) => sum + Number(task.hours), 0);
+
+    if (totalHoursForSelectedDate + parsedHours > 24) {
       return;
     }
 
@@ -33,7 +39,7 @@ const App = () => {
         ? String(Math.max(...tasks.map((task) => Number(task.id))) + 1)
         : "1";
 
-    const newTask = { id: newId, title, hours };
+    const newTask = { id: newId, title, hours, date: selectedDate };
 
     const createdTask = await ApiService.createTask(newTask);
     if (createdTask) {
@@ -64,37 +70,62 @@ const App = () => {
   };
 
   return (
-    <div className="page-wrap">
-      <Header
-        isModalOpen={isCreateModalOpen}
-        openModal={() => setIsCreateModalOpen(true)}
-        closeModal={() => setIsCreateModalOpen(false)}
-        addTask={addTask}
-      />
+    <BrowserRouter>
+      <div className="page-wrap">
+        <Header
+          isModalOpen={isCreateModalOpen}
+          openModal={() => setIsCreateModalOpen(true)}
+          closeModal={() => setIsCreateModalOpen(false)}
+          addTask={addTask}
+          selectedDate={selectedDate}
+          tasks={tasks}
+        />
 
-      <TaskList
-        tasks={tasks}
-        removeTask={removeTask}
-        openEditModal={openEditModal}
-      />
+        <Routes>
+          <Route
+            path="/:date"
+            element={
+              <TaskList
+                tasks={tasks}
+                removeTask={removeTask}
+                openEditModal={openEditModal}
+                onDateChange={setSelectedDate}
+              />
+            }
+          />
+          <Route
+            path="/"
+            element={
+              <TaskList
+                tasks={tasks}
+                removeTask={removeTask}
+                openEditModal={openEditModal}
+                onDateChange={setSelectedDate}
+              />
+            }
+          />
+        </Routes>
 
-      <Footer />
+        <ModalComponentCreate
+          isModalOpen={isCreateModalOpen}
+          closeModal={() => setIsCreateModalOpen(false)}
+          addTask={addTask}
+          selectedDate={selectedDate}
+          tasks={tasks}
+        />
 
-      <ModalComponentCreate
-        isModalOpen={isCreateModalOpen}
-        closeModal={() => setIsCreateModalOpen(false)}
-        addTask={addTask}
-        totalHours={totalHours}
-      />
+        <ModalComponentEdit
+          isModalOpen={isEditModalOpen}
+          closeModal={() => setIsEditModalOpen(false)}
+          saveChanges={saveChanges}
+          currentTask={currentTask}
+          tasks={tasks}
+          selectedDate={selectedDate}
+        />
 
-      <ModalComponentEdit
-        isModalOpen={isEditModalOpen}
-        closeModal={() => setIsEditModalOpen(false)}
-        saveChanges={saveChanges}
-        currentTask={currentTask}
-        totalHours={totalHours}
-      />
-    </div>
+        <Footer />
+      </div>
+    </BrowserRouter>
   );
 };
 
