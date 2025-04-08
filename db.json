@@ -1,20 +1,8 @@
 {
   "tasks": [
     {
-      "id": "1",
-      "title": "Meeting with team",
-      "hours": 2,
-      "date": "2025-04-03"
-    },
-    {
-      "id": "2",
-      "title": "Code review",
-      "hours": 3,
-      "date": "2025-04-03"
-    },
-    {
       "id": "3",
-      "title": "Design mockups",
+      "title": "Design mockup",
       "hours": 4,
       "date": "2025-04-01"
     },
@@ -119,6 +107,12 @@
       "title": "sadadsads",
       "hours": 20,
       "date": "2025-04-22"
+    },
+    {
+      "id": "21",
+      "title": "Play a basketball",
+      "hours": 18,
+      "date": "2025-04-01"
     }
   ]
 }

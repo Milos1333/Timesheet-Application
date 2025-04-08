@@ -133,6 +133,41 @@
   transform: scale(1.08);
 }
 
+.ant-popover-inner {
+  max-width: 400px;
+  min-width: 100px;
+  width: 100%;
+  margin-left: 100px;
+}
+
+.ant-popconfirm-message-icon {
+  width: 20px;
+}
+
+.ant-popconfirm-buttons {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.ant-popconfirm-title,
+.ant-popconfirm-description {
+  text-align: center;
+}
+
+.ant-popconfirm-description {
+  padding-bottom: 10px;
+}
+
+.ant-btn {
+  width: 150px !important;
+}
+
+@media only screen and (max-width: 1000px) {
+  .ant-popover-inner {
+    margin-left: 20px;
+  }
+}
+
 @media only screen and (max-width: 600px) {
   .check-flag {
     padding: 30px 20px 20px;
@@ -144,5 +179,9 @@
 
   .small-text-label.hours {
     right: 25px;
+  }
+
+  .ant-popover-inner {
+    margin-left: 20px;
   }
 }
