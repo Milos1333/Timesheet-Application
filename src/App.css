@@ -103,6 +103,15 @@ body {
   transform: scale(1.1);
 }
 
+.ant-message-notice-content {
+  width: 200px;
+  font-size: 12px;
+}
+
+.anticon {
+  width: 20px;
+}
+
 @media only screen and (max-width: 600px) {
   .btn {
     padding: 15px 25px;

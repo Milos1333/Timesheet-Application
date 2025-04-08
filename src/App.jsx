@@ -8,6 +8,7 @@ import ModalComponentEdit from "./components/modalComponentEdit/ModalComponentEd
 import ApiService from "./core/ApiService";
 import RedirectToToday from "./components/redirectToToday/RedirectToToday";
 import { useEffect, useState } from "react";
+import { message } from "antd";
 
 const App = () => {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
@@ -15,6 +16,7 @@ const App = () => {
   const [tasks, setTasks] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
   const [currentTask, setCurrentTask] = useState(null);
+  const [messageApi, contextHolder] = message.useMessage();
 
   useEffect(() => {
     const fetchAllTasks = async () => {
@@ -46,12 +48,14 @@ const App = () => {
     if (createdTask) {
       setTasks([...tasks, createdTask]);
       setIsCreateModalOpen(false);
+      messageApi.success("Task successfully created!");
     }
   };
 
   const removeTask = async (id) => {
     await ApiService.deleteTask(id);
     setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+    messageApi.success("Task successfully deleted!");
   };
 
   const openEditModal = (task) => {
@@ -67,11 +71,13 @@ const App = () => {
       );
       setTasks(updatedTasks);
       setIsEditModalOpen(false);
+      messageApi.success("Task successfully edited!");
     }
   };
 
   return (
     <div className="page-wrap">
+      {contextHolder}
       <Header
         isModalOpen={isCreateModalOpen}
         openModal={() => setIsCreateModalOpen(true)}
@@ -121,4 +127,3 @@ const App = () => {
 };
 
 export default App;
-
