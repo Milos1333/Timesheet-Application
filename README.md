@@ -99,5 +99,5 @@ The application communicates with a mock API using JSON Server to simulate backe
 
 Quotes are stored in a static JSON file and are shown randomly on page load. You can modify the quotes list by editing the JSON file directly.
 
-Author
+## Author
 Milos Klepic
