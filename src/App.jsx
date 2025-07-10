@@ -86,7 +86,7 @@ const App = () => {
         selectedDate={selectedDate}
         tasks={tasks}
       />
-      <BrowserRouter>
+      <BrowserRouter basename="/Timesheet-Application">
         <Routes>
           <Route path="/" element={<RedirectToToday />} />
 
